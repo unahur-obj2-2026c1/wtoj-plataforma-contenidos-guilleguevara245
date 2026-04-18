@@ -6,6 +6,6 @@ public class Pelicula extends Contenido{
     }
     @Override
     public Double doCosto() {
-        return null;
+        return getCostoBase();
     }
 }
