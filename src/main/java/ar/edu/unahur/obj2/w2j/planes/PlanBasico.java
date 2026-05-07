@@ -5,6 +5,7 @@ import ar.edu.unahur.obj2.w2j.usuarios.Usuario;
 
 public class PlanBasico implements IPlan{
     private Integer limite;
+    private Double costoBase = 5.0;
 
     public PlanBasico(Integer limite){
         this.limite = limite;
@@ -12,16 +13,11 @@ public class PlanBasico implements IPlan{
 
     @Override
     public Double costoPlan(Usuario usuario) {
-        Double costoBase = 5.0;
         List<Contenido> contenidos = usuario.getContenidos();
-        if(limite >= contenidos.size()) {
-            return costoBase;
-        } else {
-            List<Contenido> excedentes = contenidos.subList(limite, contenidos.size());
-            return costoBase + excedentes.stream().mapToDouble(c -> c.costo()).sum();
-        }
-    }
-
-
-    
+        Double costoExcedentes = contenidos.stream()
+        .skip(limite)
+        .mapToDouble(Contenido::getCostoBase)
+        .sum();
+        return this.costoBase + costoExcedentes;
+ }
 }

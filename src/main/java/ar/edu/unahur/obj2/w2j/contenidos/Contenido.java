@@ -24,6 +24,6 @@ public abstract class Contenido {
         return costoBase + doCosto();
     }
     //Metodo abstracto doCosto()
-    public abstract Double doCosto();
+    protected abstract Double doCosto();
 
     }
